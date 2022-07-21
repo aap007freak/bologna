@@ -13,12 +13,15 @@ def __preprocess_arguments(f, arguments, keyword_arguments):
     all_args = data.args
     defaults = data.defaults
 
-    required_args = set(all_args[:len(all_args) - len(defaults)])
+    required_args = set(all_args[: len(all_args) - len(defaults)])
     provided_required_args = {all_args[i] for i in range(len(arguments))}.union(
-        {x for x in keyword_arguments if x in required_args})
+        {x for x in keyword_arguments if x in required_args}
+    )
     diff = required_args.difference(provided_required_args)
     for name in diff:
-        raise AttributeError(f"function {f} takes a required positional argument '{name}' that was not given!")
+        raise AttributeError(
+            f"function {f} takes a required positional argument '{name}' that was not given!"
+        )
 
     output_args = dict()
     for i, c in enumerate(arguments):
