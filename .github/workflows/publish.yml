@@ -9,14 +9,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
       - name: Run image
         uses: abatilo/actions-poetry@v2.0.0
       - name: Install dependencies
         run: poetry install
-      - name: Build distribution
-        run: poetry build
       - name: Publish
-        run: poetry publish --username "__token__" --password "${{ secrets.PYPI_TOKEN }}"
+        run: poetry publish --build --username "__token__" --password "${{ secrets.PYPI_TOKEN }}"
 
 
   release:
