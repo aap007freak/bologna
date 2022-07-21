@@ -22,6 +22,6 @@ jobs:
       - name: Install dependencies
         run: poetry install
       - name: Run black
-        run: poetry run black --check
+        run: poetry run black bologna --check
       - name: Run tests
         run: poetry run pytest tests
