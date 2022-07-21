@@ -12,9 +12,10 @@ As the source code is only 100-ish lines, extending it is very easy.
 ## Usage
 
 - Declare injectable dependencies with the `provide` function:
+
 ```python
 
-from tinydi import provide
+from bologna import provide
 from datetime import date
 
 my_injectable_string = "Hello, DI. Today is"
@@ -26,13 +27,16 @@ provide("thedate", my_injectable_object)
 every injectable needs a unique name, which will be the function argument names.
  
 - Mark functions that need to have arguments injected by the ´@inject´ annotation:
+
 ```python
 
-from tinydi import inject
+from bologna import inject
+
 
 @inject
-def print_date(greeting = None, thedate=None):
+def print_date(greeting=None, thedate=None):
     print(f"{greeting}; {thedate}")
+
 
 print_date()
 # prints 'Hello, DI. Today is; 2022-07-21'

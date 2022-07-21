@@ -1,4 +1,4 @@
-import tinydi
+import bologna
 import threading
 
 
@@ -8,13 +8,13 @@ class Object:
 
 def test_di():
     my_object = Object()
-    tinydi.provide("object", my_object)
+    bologna.provide("object", my_object)
 
-    @tinydi.inject
+    @bologna.inject
     def inject_here(object=None, trans=0):
         print(object)
 
-    @tinydi.inject
+    @bologna.inject
     async def inject_here(object=None, trans=0):
         print(object)
 
@@ -30,10 +30,10 @@ def test_readme():
     my_injectable_string = "Hello, DI. Today is"
     my_injectable_object = date.today()
 
-    tinydi.provide("greeting", my_injectable_string)
-    tinydi.provide("thedate", my_injectable_object)
+    bologna.provide("greeting", my_injectable_string)
+    bologna.provide("thedate", my_injectable_object)
 
-    @tinydi.inject
+    @bologna.inject
     def print_date(greeting=None, thedate=None):
         print(f"{greeting}; {thedate}")
 
