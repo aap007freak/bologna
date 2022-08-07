@@ -20,7 +20,7 @@ def test_di():
     async def inject_here(object=None, trans=0):
         print(object)
 
-    inject_here()
+    inject_here(0)
     thr = threading.Thread(target=inject_here)
     thr.start()
     thr.join()
@@ -52,7 +52,7 @@ def provide_some_variables():
 
 
 def test_positional_only():
-    @bologna.inject_new
+    @bologna.inject
     def f(x, b, /):
         return x, b
 
@@ -60,7 +60,7 @@ def test_positional_only():
 
 
 def test_positional_only_both_positions():
-    @bologna.inject_new
+    @bologna.inject
     def f(a, b, /):
         return a, b
 
@@ -68,7 +68,7 @@ def test_positional_only_both_positions():
 
 
 def test_positional_only_not_enough_arguments():
-    @bologna.inject_new
+    @bologna.inject
     def f(a, b, x, y):
         return a, b, x, y
 
@@ -76,8 +76,8 @@ def test_positional_only_not_enough_arguments():
         f(1)
 
 
-def test_positional_or_keyword():
-    @bologna.inject_new
+def tetodo_positional_or_keyword():
+    @bologna.inject
     def f(a, x, b, y):
         return a, x, b, y
 

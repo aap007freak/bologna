@@ -45,6 +45,7 @@ def _inject_sync(f):
             var_key_arguments,
             var_pos_key_arguments,
         ) = construct_arguments(
+            f,
             pos_only_parameters,
             pos_key_parameters,
             var_pos_key_parameters,
@@ -104,6 +105,7 @@ def analyze_signature(f):
 
 
 def construct_arguments(
+    f,
     pos_only_parameters,
     pos_key_parameters,
     var_pos_key_parameters,
@@ -219,10 +221,10 @@ def construct_arguments(
             var_key_arguments = {
                 name: _injectables[name] for name in providable_var_key_params
             }
-    print(
-        f"After analysing function parameters, passed arguments and injectables, we've determined the function "
-        f"signature to be: ({pos_only_arguments}, \, {pos_key_arguments}, *{var_pos_key_arguments}, {key_only_arguments}, **{var_key_arguments})"
-    )
+    # print(
+    #    f"After analysing function parameters, passed arguments and injectables, we've determined the function "
+    #    f"signature to be: ({pos_only_arguments}, \, {pos_key_arguments}, *{var_pos_key_arguments}, {key_only_arguments}, **{var_key_arguments})"
+    # )
     return (
         key_only_arguments,
         pos_key_arguments,
@@ -251,6 +253,7 @@ def _inject_async(f):
             var_key_arguments,
             var_pos_key_arguments,
         ) = construct_arguments(
+            f,
             pos_only_parameters,
             pos_key_parameters,
             var_pos_key_parameters,
