@@ -1,3 +1,5 @@
+import pytest
+
 import bologna
 import threading
 
@@ -38,3 +40,50 @@ def test_readme():
         print(f"{greeting}; {thedate}")
 
     print(print_date())
+
+
+@pytest.fixture(autouse=True, scope="module")
+def provide_some_variables():
+    bologna.provide("a", "avalue")
+    bologna.provide("b", "bvalue")
+    bologna.provide("c", "cvalue")
+    bologna.provide("d", ["d1", "d2", "d3"])
+    bologna.provide("e", {"e1": "e1value", "e2": "e2value"})
+
+
+def test_positional_only():
+    @bologna.inject_new
+    def f(x, b, /):
+        return x, b
+
+    assert f(1) == (1, "bvalue")
+
+
+def test_positional_only_both_positions():
+    @bologna.inject_new
+    def f(a, b, /):
+        return a, b
+
+    assert f() == ("avalue", "bvalue")
+
+
+def test_positional_only_not_enough_arguments():
+    @bologna.inject_new
+    def f(a, b, x, y):
+        return a, b, x, y
+
+    with pytest.raises(bologna.InjectionError):
+        f(1)
+
+
+def test_positional_or_keyword():
+    @bologna.inject_new
+    def f(a, x, b, y):
+        return a, x, b, y
+
+    assert f(1, 2) == ("avalue", 1, "bvalue", 2)
+    assert f(y=1, x=2) == ("bvalue", 2, "avalue", 1)
+
+
+def test_positional_or_keyword_not_enough_arguments():
+    pass

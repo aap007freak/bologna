@@ -1,1 +1,1 @@
-from bologna.di import provide, inject
+from bologna.di import provide, inject, inject_new, InjectionError
