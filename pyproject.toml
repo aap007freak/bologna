@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bologna"
-version = "v0.1.4"
+version = "0.2.0"
 description = "A tiny no-faff dependency injection module for python."
 authors = ["Anton Leagre"]
 license = "MIT"
