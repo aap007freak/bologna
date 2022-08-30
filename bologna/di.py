@@ -134,7 +134,6 @@ def construct_arguments(
         else _injectables[name]
         for name in pos_only_parameters
     }
-    print(pos_only_arguments)
     remaining_args = list(iargs)
     iargs = iter(remaining_args)
     # now moving on to pos-key-parameters, we
@@ -153,7 +152,6 @@ def construct_arguments(
         else _injectables[name]
         for name in pos_key_parameters
     }
-    print(pos_key_arguments)
     remaining_args = list(iargs)
     # construct the varpos-arguments. If they can be provided, they take precedence on the passed as always
     if not var_pos_key_parameters and remaining_args:
@@ -162,7 +160,6 @@ def construct_arguments(
             f"Function {f.__name__} has {len(remaining_args)} positionally given left over!"
         )
     var_pos_key_arguments = {}
-    print("remaing args" + str(remaining_args))
     if var_pos_key_parameters:
         varpos_name = var_pos_key_parameters[0] or ""
 
@@ -179,7 +176,6 @@ def construct_arguments(
                 f"Function {f.__name__} expects variable positional-or-keyword parameter {varpos_name},"
                 f"But has no arguments passed that are passed potionally, as keyword and is not injectable!."
             )
-    print(var_pos_key_arguments)
     # key word arguments
     providable_keyword_only_parameters = providable_parameters(key_only_parameters)
     not_given_keyword_args = set(key_only_parameters).difference(

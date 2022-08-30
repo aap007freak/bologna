@@ -20,8 +20,7 @@ def test_di():
     async def inject_here(object=None, trans=0):
         print(object)
 
-    inject_here(0)
-    thr = threading.Thread(target=inject_here)
+    thr = threading.Thread(target=inject_here, args={1})
     thr.start()
     thr.join()
 
@@ -87,3 +86,27 @@ def tetodo_positional_or_keyword():
 
 def test_positional_or_keyword_not_enough_arguments():
     pass
+
+def test_injection_in_methods():
+
+    class TestClass:
+        @bologna.inject
+        def __init__(self, x, a):
+            assert a
+        @staticmethod
+        @bologna.inject
+        def static(b, c):
+            assert b
+            assert c
+
+        @classmethod
+        @bologna.inject
+        def klass(cls, d, e):
+            assert d
+            assert e
+
+    t = TestClass("doremi")
+    t.static()
+    t.klass()
+
+
